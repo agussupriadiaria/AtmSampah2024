@@ -1,0 +1,6 @@
+- Thermal printer berhasil di print.
+Pakai app Zint Barcode Studio, type EAN(EAN-2/5/8/13)(ISO 15420)
+Format file: .png
+Detail print:
+Lebar kertas: 33mm
+lebar barcode: 30mm
