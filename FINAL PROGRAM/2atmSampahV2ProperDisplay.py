@@ -1,6 +1,4 @@
 '''
-Testing hahaha
-
 SERIAL KOMUNIKASI UART 3
 Spec: Raspberry pi 3 or 4
 Detail: 1 channel
