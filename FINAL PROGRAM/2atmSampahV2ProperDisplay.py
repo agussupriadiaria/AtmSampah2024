@@ -13,7 +13,7 @@ https://www.youtube.com/watch?v=Eqzw994ImUo&ab_channel=FuzzThePiGuy
 https://fuzzthepiguy.tech/rtc/
 - Raspy thermal printer:
 https://circuitdigest.com/microcontroller-projects/thermal-printer-interfacing-with-raspberry-pi-zero-to-print-text-images-and-bar-codes
-
+- https://saptaji.com/2023/05/25/mengambil-data-waktu-rtc-ds3231-di-raspberry-pi-dengan-python/
 ===================
 PINS
 * RASPBERRY <> ARDUINO MEGA [barcode scanner]
