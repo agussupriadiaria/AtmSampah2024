@@ -1,0 +1,59 @@
+DOKUMENTASI ATM SAMPAH 2024
+Sistem: Barcode scanner
+Sabtu, 4 Mei 2024
+
+-------------------------------
+> PREPARE RASPY
+- Install OS di app imager
+- Install xrdp (sudo apt install xrdp)
+- Enable all interface: [i2c, SPI, SSH, VNC]
+-------------------------------
+> SETTING RTC
+Source: http://www.intellamech.com/RaspberryPi-projects/rpi_RTCds3231 
+RTC: DS3231
+
+Pins:
+Raspi <> RTC
+3.3v	- VCC
+SDA/2	- SDA
+SCL/3	- SCL
+GN/	- GN
+-------------------------------
+> AKTIVASI RTC
+- Install the utilities
+sudo apt-get update
+sudo apt-get install python-smbus
+sudo apt-get install i2c-tools
+- Enable kernel support
+sudo raspi-config.
+Choose Advanced Options then I2C and select yes to enable the interface.
+- Edit the module file
+sudo nano /etc/modules
+Add the following to the to the end of this file
+i2c-bcm2708
+i2c-dev
+rtc-ds1307
+
+- Test the bus
+Check your I2C bus with, sudo i2cdetect -y 1. The output should be similar to this
+
+- Load the clock at boot
+sudo nano /etc/rc.local
+Add the following lines before exit 0
+echo ds1307 0x68 > /sys/class/i2c-adapter/i2c-1/new_device
+hwclock -s
+Reboot
+
+- Set date and time
+When connected to the Internet, the pi automatically gets the date and time from time servers. These are quite accurate. With the command hwclock -s in rc.local, we have set the pi to override this time to match the RTC. This is fine once we have the correct time on the RTC. So let's set it to the correct time.
+sudo nptd -g -q - set the pi's system time to Internet time
+date - check the system time
+sudo hwclock -r - check the date and time of the RTC
+sudo hwclock -w - write the system time to the RTC
+sudo hwclock -s - set the system time from the RTC
+-------------------------------
+> INSTALL PYTHON PACKAGE
+Pastikan sudah terinstal python dan pip3
+Untuk memastikan:
+sudo apt install python3-pip
+**Pastikan pip-nya terbaru
