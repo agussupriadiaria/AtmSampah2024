@@ -1,4 +1,4 @@
-DOKUMENTASI ATM SAMPAH 2024
+*DOKUMENTASI ATM SAMPAH 2024*
 Sistem: Barcode scanner
 Sabtu, 4 Mei 2024
 
@@ -11,7 +11,6 @@ Sabtu, 4 Mei 2024
 > SETTING RTC
 Source: http://www.intellamech.com/RaspberryPi-projects/rpi_RTCds3231 
 RTC: DS3231
-
 Pins:
 Raspi <> RTC
 3.3v	- VCC
@@ -33,17 +32,14 @@ Add the following to the to the end of this file
 i2c-bcm2708
 i2c-dev
 rtc-ds1307
-
 - Test the bus
 Check your I2C bus with, sudo i2cdetect -y 1. The output should be similar to this
-
 - Load the clock at boot
 sudo nano /etc/rc.local
 Add the following lines before exit 0
 echo ds1307 0x68 > /sys/class/i2c-adapter/i2c-1/new_device
 hwclock -s
 Reboot
-
 - Set date and time
 When connected to the Internet, the pi automatically gets the date and time from time servers. These are quite accurate. With the command hwclock -s in rc.local, we have set the pi to override this time to match the RTC. This is fine once we have the correct time on the RTC. So let's set it to the correct time.
 sudo nptd -g -q - set the pi's system time to Internet time
@@ -56,4 +52,71 @@ sudo hwclock -s - set the system time from the RTC
 Pastikan sudah terinstal python dan pip3
 Untuk memastikan:
 sudo apt install python3-pip
+- Install package untuk thermal printer
+Package yang digunakan adalah python-escpos
+Cari package di website python https://pypi.org/ 
 **Pastikan pip-nya terbaru
+4 Mei 2024, saat ini ada proteksi package pip yang bukan bawaan python, untuk melanjutkan proses install dan update harus ada tambahan command dibagian akhir.
+Contoh:
+pip install python-escpos --break-system-package
+-------------------------------
+> MEMBUAT PROGRAM AUTO ON SAAT START-UP
+- Autostart program
+Source: https://www.youtube.com/watch?v=cZa1oCSdbUk&t=113s 
+1. Buka explorer > User
+2. Klik folder .config
+3. Buat folder autstart
+3. Buat file dengan format .desktop
+Kontent:
+[Desktop Entry] #Wajib agar bisa di exe
+Exec= python3 /home/aria/Coba/coba2.py #Kontent untuk di autostart
+- Autostart disable mouse
+Source: https://www.youtube.com/watch?v=6-gyF-cLFQU&ab_channel=BaldGuyDIY 
+1. Buka explorer > User
+2. Klik folder .config
+3. Buat folder autstart
+3. Buat file dengan format .desktop
+Kontent:
+[Desktop Entry] #Wajib agar bisa di exe
+Exec= unclutter -idle 0 #Buat matiin cursor
+-------------------------------
+>MENGGANTI TAMPILAN SCREEN SAAT BOOTING
+Agar lebih professional, tampilan booting juga harus diubah text messagen dan gambarnya menjadi nama perorangan biar lebih personal.
+Source: https://www.youtube.com/watch?v=kdugp7DrODY 
+- Menghilangkah splash screen saat booting
+Splash screen adalah tampilan pelangi saat booting berlangsung.
+Langkah menghilangkannya:
+sudo nano /boot/firmware/config.txt
+Pada text bagian bawah, tambahkan kode:
+disable_splash=1
+- Menghilangkan pesan text saat booting
+Langkahnya:
+sudo nano /usr/share/plymouth/themes/pix/pix.script
+Buat code menjadi dengan menambahkan [#]:
+#message_sprite = Sprite();
+#message_sprite.SetPosition (screen_width * 0.1, screen_ height * 0.9,10000);
+
+fun message_callback (text) {
+#my _ image = Image.Text(text, 1, 1, 1);
+#message_sprite. Setlmage ( my_image) ;
+sprite. Setlmage (resized_image) ;
+- Menghilangkan pesan booting
+sudo nano /boot/firmware/cmdline.txt
+Then, replace “console=tty1” with “console=tty3”
+add below at the end of the line
+splash quiet plymouth.ignore-serial-consoles logo.nologo vt.global_cursor_default=0
+Here are brief explanations.
+‘splash’ : enables splash image
+‘quiet’ : disable boot message texts
+‘plymouth.ignore-serial-consoles’ : not sure about this but seems it’s required when use Plymouth.
+‘logo.nologo’ : removes Raspberry Pi logo in top left corner.
+‘vt.global_cursor_default=0’ : removes blinking cursor.
+- Simpan konfigurasi boot theme
+sudo plymouth-set-default-theme --rebuild-initrd pix
+Source: https://www.youtube.com/watch?v=u86vXKuar8A&ab_channel=mistervaso 
+-------------------------------
+> BACKUP RASPBERRY PI
+Untuk proses backup menggunakan fitur:
+Accessories > SD Card Copier
+Terus copy data dari SD card to USB
+Source: https://www.youtube.com/watch?v=OcL7Ul-ajz0&ab_channel=KM4ACK 
