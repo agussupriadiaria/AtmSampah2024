@@ -15,9 +15,10 @@ sudo chmod a+w /dev/serial0
 WIRING:
 *Raspi
 gpio 6 = [output] untuk output ke barcode scanner dan conyeyor | buat rescand pin ini diaktifkan lagi
-gpio 13 = [input] ke IR sensor, untuk input sensor input bottle = mendapatkan signal jika ada botol masuk
-gpio 19 = [input] ke push button untuk cetak struk (optional)
+gpio 13 = 
+gpio 19 = [input] ke IR sensor, untuk input sensor input bottle = mendapatkan signal jika ada botol masuk
 gpio 26 = [output] ke relay untuk output ke arduino = memberikan signal untuk menggerakkan stepper motor jika ada botol masuk
+Notes: Sepertinya ada pin yang tertukar, cek lagi=========
 
 *RTC
 SCL = gpio 3
