@@ -32,9 +32,9 @@ def mainPage():
     global root, timeStamp, dateStamp, barcodeLabel, jumlahLabel, ukuranLabel, nominalLabel, barcodeLabel, bottle, saldo, parameterLabel3, userIDLabel
     root = Tk()
     root.title("atm sampah - aria")
-    root.attributes("-fullscreen", True)
     #root.geometry("800x500")
     root.config(bg="white")
+    root.attributes("-fullscreen", True)
 
     titleLabel = Label(root, text="ATM SAMPAH", font=("Helvatica",18, "bold"), bg="white")
     titleLabel.place(relx=0.5, rely=0.1,anchor=CENTER)

@@ -68,9 +68,9 @@ def mainPage():
     root = Tk()
     root.title("atm sampah - aria")
     #Full screen geometry
-    #root.attributes("-fullscreen", True)
-    root.geometry("800x500")
+    #root.geometry("800x500")
     root.config(bg="white")
+    root.attributes("-fullscreen", True) #fullscreen taruh paling bawah
 
 #LABEL TITLE====================
     titleLabel = Label(root, text="ATM SAMPAH", font=("Helvatica",18, "bold"), bg="white")
