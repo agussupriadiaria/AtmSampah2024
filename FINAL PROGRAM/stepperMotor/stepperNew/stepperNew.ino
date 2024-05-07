@@ -21,8 +21,6 @@ PIN:
 5 > button
 6 > insensor 
 ===================
-History:
-- 1 Mei 2024 > testing lagi
 
 */
 

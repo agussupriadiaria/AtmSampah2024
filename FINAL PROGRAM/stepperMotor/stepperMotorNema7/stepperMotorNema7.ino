@@ -1,6 +1,17 @@
 /*
+3ATM SAMPAH 2024
+=================
+Part : Nema 17, tb6600, LED
+Setting: 
+- Arduino Uno
+- Microstep 16, pulse/rev 3200
+- Amps: 2 Amps
+=================
 Source: https://mytectutor.com/tb6600-stepper-motor-driver-with-arduino/
-
+=================
+History:
+- Testing 2024
+=================
 Pin yang nempel di Uno:
 2 Dir + x
 3 Pull + 
