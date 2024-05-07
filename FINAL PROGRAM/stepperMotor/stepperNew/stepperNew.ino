@@ -19,7 +19,7 @@ PIN:
 2 > dir
 4 > en
 5 > button
-6 > in sensor 
+6 > insensor 
 ===================
 History:
 - 1 Mei 2024 > testing lagi
@@ -27,7 +27,7 @@ History:
 */
 
 //STEPPER MOTOR=================
-const int stepPin = 3; //5
+const int stepPin = 3; //5 pin buat apa ini? ===========
 const int dirPin = 2; //2
 const int enPin = 4; //8
 //INPUT FROM RASPI===============
@@ -92,7 +92,7 @@ void stepperMove() {
     digitalWrite(stepPin,LOW);
     delayMicroseconds(4000);
   }
-  delay(500); //Delay perlu dipakai nggak ya? xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+  delay(500); //Delay perlu dipakai nggak ya?
   digitalWrite(dirPin,HIGH); //Changes the direction of rotation
   for(int x = 0; x < 400; x++) {
     digitalWrite(stepPin,HIGH);

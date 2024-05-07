@@ -1,13 +1,25 @@
 /*
- * Source: https://mytectutor.com/tb6600-stepper-motor-driver-with-arduino/
- * 
+Source: https://mytectutor.com/tb6600-stepper-motor-driver-with-arduino/
+
+Pin yang nempel di Uno:
+2 Dir + x
+3 Pull + 
+4 Ena + x
+5 Input dari relay x
+6 IR sensor stepper position
+
+8 LED siap x
+9 LED proses x
+
 */
 
-const int stepPin = 5; 
-const int dirPin = 2; 
-const int enPin = 8;
-int buttonPin = 9;
-int ledPin = 13;
+const int stepPin = 3; // PullPin --- done
+const int dirPin = 2; //--- bener
+const int enPin = 4; //--- bener
+int buttonPin = 5; // dari relay raspberry--- done
+int ledPinSiap = 8; //---done
+int ledPinProses = 9; // --- done
+
 int buttonCondition = 0;
 
 void setup() {
@@ -16,19 +28,21 @@ void setup() {
   pinMode(dirPin,OUTPUT);
   pinMode(enPin,OUTPUT);
   pinMode(buttonPin,INPUT);
-  pinMode (ledPin,OUTPUT);
+  pinMode (ledPinSiap,OUTPUT);
+  pinMode (ledPinProses,OUTPUT);
   digitalWrite(enPin,LOW);
-  
 }
 
 void loop(){
   buttonCondition = digitalRead (buttonPin);
   if(buttonCondition == HIGH){
-    digitalWrite(ledPin,HIGH);
+    digitalWrite(ledPinProses,HIGH);
+    digitalWrite(ledPinSiap,LOW);
     stepperMove();
   }
   else{
-    digitalWrite(ledPin,LOW);
+    digitalWrite(ledPinProses,LOW);
+    digitalWrite(ledPinSiap,HIGH);
   }
 }
 

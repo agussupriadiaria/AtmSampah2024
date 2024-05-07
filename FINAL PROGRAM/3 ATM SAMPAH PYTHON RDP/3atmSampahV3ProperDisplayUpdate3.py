@@ -39,9 +39,10 @@ toDo List 2:
 - Scanner to raspy udah ok, tinggal arduino to thernal printer, apakah bisa ok?
 
 ISSUE:
-- Kalau sudah input botol, tapi nggak kebaca, auto stop atau no proses, biar botol diambil lagi.
-- Buat sistem melakuan akumulasi dulu, habis itu setelah di pencet tombol print baru cetak struk dan reset data userID >> OK
-- Waktu pertama kali nyala, semua pin IO malah on, gimana biar bisa off? --- issue muncul lagi.
+- String issue, tampilan angka barcode tidak sesuai | barcode udah sesuai, yang discan harus 13 digit barcode, bukan 12 --- done
+- Data belum tersimpan device | Data sudah tersimpan --- done
+- Servo dan stepper motor belum jalan, padahal sudah ada input masuk dari IR --- done
+- Full sensor masih belum normal
 
 '''
 
@@ -66,7 +67,7 @@ gp.setup(13, gp.OUT)
 gp.output(13, gp.HIGH)
 gp.setup(19, gp.OUT)
 gp.output(19, gp.HIGH)
-gp.output(26, gp.IN, pull_up_down=gp.PUD_UP)
+gp.setup(26, gp.IN, pull_up_down=gp.PUD_UP)
 
 
 #TAMBAHAN PENYETABIL BACAAN SENSOR============
@@ -80,8 +81,8 @@ def mainPage():
     root = Tk()
     root.title("atm sampah - aria")
     #Full screen geometry
-    root.attributes("-fullscreen", True)
-    #root.geometry("800x500")
+    #root.attributes("-fullscreen", True)
+    root.geometry("800x500")
     root.config(bg="white")
 
 #LABEL TITLE====================
@@ -238,7 +239,8 @@ def thermalPrinterX():
 #DEF SAVE DATA TO STORAGE=================
 def saveData():
     #fb = open('/home/aria/EVERMOS AGUS/PROJECT/gitHub/pythonProject/pythonProject/saveData/data.txt', 'a')
-    fb = open('/home/aria/saveData/saveData.txt', 'a')
+    #fb = open('/home/aria/saveData/saveData.txt', 'a')
+    fb = open('/home/blacksheep/saveData/saveData.txt', 'a')
     fb.write("Barcode: ")
     fb.write(lineRead)
     fb.write(' / ')
@@ -270,7 +272,7 @@ def saveData():
 #ARGS COMMAND HERE=====================
 def barcodeGate(): #INI DITARUH DIMANA COBA???
     global saldo
-    if(lineRead=="8998899400341"):
+    if(lineRead=="8991389232057"):
         pinOutArduino()
         ukuranLabel["text"] = "Big"
         nominalLabel["text"] = "15"
@@ -287,13 +289,15 @@ def barcodeGate(): #INI DITARUH DIMANA COBA???
     else:
         ukuranLabel["text"] = "Not Registered"
         nominalLabel["text"] = "Not Registered"
+        print(lineRead)
         print(bottle)
         print(saldo)
         print("")
 '''
 8997009510123
 8992775709061
-8992745610816'''
+8992745610816
+Kertas: 8991389232057 '''
 #DATA BARCODE SAMPLE======================
 # 1	Orange Water	8997009510123	10	Medium
 # 2	Good Mood	8992775709061	15	Big
@@ -370,9 +374,9 @@ def inSensor():
 
 def fullSensor():
     if (gp.input(6) == gp.LOW):
-        gp.out(5, gp.HIGH)
-    else:
         gp.out(5, gp.LOW)
+    else:
+        pass
     root.after(10,pushButton)
 
 #MASUKKAN PILIHAN PORT DAN BAUD RATE================
@@ -408,6 +412,6 @@ def closeWindow():
 mainPage()
 #root.after(10,cetakStruk)
 root.after(10,inSensor)
+root.after(10,fullSensor)
 root.protocol("WM_DELETE_WINDOW",closeWindow) #Stop running loop ketika nggak sengaja ter close
 root.mainloop()
-
