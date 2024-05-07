@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2024-05-07T15:43:07.774Z" agent="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36" etag="Fp7tl_Yl_59SJcxaSC6B" version="24.3.1" type="github">
+<mxfile host="app.diagrams.net" modified="2024-05-07T15:43:34.242Z" agent="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36" etag="_jyd78I6lzaNbttsKIFc" version="24.3.1" type="github">
   <diagram name="Page-1" id="aYxfGkl3QDBVgvzzzuq5">
     <mxGraphModel dx="1147" dy="634" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="400" math="0" shadow="0">
       <root>
@@ -11,7 +11,7 @@
           <mxGeometry x="320" y="60" width="210" height="30" as="geometry" />
         </mxCell>
         <mxCell id="EnL6qkaupRp9sSKFVn2w-2" value="tb6600" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;horizontal=0;fontSize=10;" parent="1" vertex="1">
-          <mxGeometry x="265" y="157.8048780487805" width="64" height="78.78048780487804" as="geometry" />
+          <mxGeometry x="290" y="150.00487804878048" width="64" height="78.78048780487804" as="geometry" />
         </mxCell>
         <mxCell id="HzISlPGwg9PZWOorR9Tu-1" value="Relay 1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;horizontal=0;fontSize=10;" vertex="1" parent="1">
           <mxGeometry x="371.66666666666663" y="130" width="26.666666666666664" height="46.34146341463414" as="geometry" />
@@ -32,7 +32,7 @@
           <mxGeometry x="448.99999999999994" y="194.8780487804878" width="21.333333333333332" height="46.34146341463414" as="geometry" />
         </mxCell>
         <mxCell id="HzISlPGwg9PZWOorR9Tu-7" value="Adapter 9V 3A" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f0a30a;fontColor=#000000;strokeColor=#BD7000;fontSize=10;" vertex="1" parent="1">
-          <mxGeometry x="361" y="250.48780487804876" width="64" height="27.804878048780488" as="geometry" />
+          <mxGeometry x="354" y="255.11780487804876" width="64" height="27.804878048780488" as="geometry" />
         </mxCell>
         <mxCell id="HzISlPGwg9PZWOorR9Tu-8" value="Arduino Mega 2560" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#1ba1e2;fontColor=#ffffff;strokeColor=#006EAF;fontSize=10;" vertex="1" parent="1">
           <mxGeometry x="489" y="134.6341463414634" width="95.99999999999997" height="46.34146341463414" as="geometry" />
@@ -50,7 +50,7 @@
           <mxGeometry x="318.3333333333333" y="310.7317073170732" width="122.66666666666666" height="9.268292682926829" as="geometry" />
         </mxCell>
         <mxCell id="HzISlPGwg9PZWOorR9Tu-18" value="PSU 12v12A" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;horizontal=0;fontSize=10;" vertex="1" parent="1">
-          <mxGeometry x="170" y="150" width="64" height="116.59" as="geometry" />
+          <mxGeometry x="210" y="150" width="64" height="116.59" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
