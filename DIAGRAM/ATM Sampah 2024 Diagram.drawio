@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2024-05-07T10:39:21.545Z" agent="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36" etag="cEji5RpcQHBfT7BR4rBP" version="24.3.1" type="github">
+<mxfile host="app.diagrams.net" modified="2024-05-07T10:39:30.689Z" agent="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36" etag="As36nQJmu8_8-kA_LGbY" version="24.3.1" type="github">
   <diagram name="Page-1" id="aYxfGkl3QDBVgvzzzuq5">
     <mxGraphModel dx="1434" dy="793" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
       <root>
@@ -8,7 +8,7 @@
           <mxGeometry x="340" y="50" width="120" height="60" as="geometry" />
         </mxCell>
         <mxCell id="EnL6qkaupRp9sSKFVn2w-2" value="ATM SAPAH 2024" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
-          <mxGeometry x="410" y="190" width="120" height="60" as="geometry" />
+          <mxGeometry x="550" y="80" width="120" height="60" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
