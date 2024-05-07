@@ -1,8 +1,25 @@
-*DOKUMENTASI ATM SAMPAH 2024*
+DOKUMENTASI ATM SAMPAH 2024
 Sistem: Barcode scanner
 Sabtu, 4 Mei 2024
 
 -------------------------------
+PARTS:
+- Raspberry PI (4 gen better), 1pcs
+- High quality 5V adapter + cable adapter for raspberry pi, 1pcs
+- HDMI cable, 1pcs
+- Arduino Mega 2560 + Barcode Module + Barcode reader, 1pcs
+- LCD 7 inch touchscreen
+- Relay 3.3v NO/NC, 3 pcs
+- Step Down LM2596, 3 pcs
+- PSU adapter 9V 3A, 1pcs
+- PSU 12V 12A, 1 pcs
+- Nema 17 Stepper motor 1pcs
+- Mini thermal printer 58mm, 1 pcs
+- 12 V DC Fan, 1pcs
+- Infra red sensor 5V DC, 3 pcs
+- DC motor 5V, 2 pcs
+**Gambar diagram  [klik]
+
 > PREPARE RASPY
 - Install OS di app imager
 - Install xrdp (sudo apt install xrdp)
@@ -58,7 +75,7 @@ Cari package di website python https://pypi.org/
 **Pastikan pip-nya terbaru
 4 Mei 2024, saat ini ada proteksi package pip yang bukan bawaan python, untuk melanjutkan proses install dan update harus ada tambahan command dibagian akhir.
 Contoh:
-pip install python-escpos --break-system-package
+pip install python-escpos --break-system-packages
 -------------------------------
 > MEMBUAT PROGRAM AUTO ON SAAT START-UP
 - Autostart program
