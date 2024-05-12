@@ -200,14 +200,14 @@ def saveData():
 
 def barcodeGate():
     global saldo
-    if(lineRead=="8991389232057"):
+    if(lineRead=="8996001600269"):
         pinOutArduino()
         ukuranLabel["text"] = "Big"
         nominalLabel["text"] = "15"
         saldo += 15
         bottleCounter()
         saveData()
-    elif(lineRead=="9300830022557"):
+    elif(lineRead=="8886008101053"):
         pinOutArduino()
         ukuranLabel["text"] = "Medium"
         nominalLabel["text"] = "10"
@@ -222,11 +222,10 @@ def barcodeGate():
         print(saldo)
         print("")
 '''
-#DATA BARCODE SAMPLE======================
-# 1 Orange Water 8997009510123, 10, Medium
-# 2 Good Mood 8992775709061,15, Big
-# 3 Hand Sanitizer 8992745610816, 10,Big / not registered
-Kertas: 8991389232057
+DATA BARCODE SAMPLE======================
+8996001600269 - le minerale - big
+8886008101053 - aqua - medium
+8997035601383 - pocari - not registered
 '''
 def updateTime():
     global time_text
