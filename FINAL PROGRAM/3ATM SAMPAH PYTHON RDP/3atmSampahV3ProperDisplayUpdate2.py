@@ -51,7 +51,6 @@ import serial.tools.list_ports
 import threading
 import time
 import sys
-import serial
 import signal
 import RPi.GPIO as gp #MODULE GPIO [KHUSUS RASPBERRY]
 import random
@@ -76,7 +75,7 @@ signal.signal(signal.SIGINT, signal_handler)
 
 #HALAMAN UTAMA====================
 def mainPage():
-    global root, timeStamp, dateStamp, barcodeLabel, jumlahLabel, ukuranLabel, nominalLabel, barcodeLabel, bottle, saldo, parameterLabel3, userIDLabel
+    global root, timeStamp, dateStamp, barcodeLabel, jumlahLabel, ukuranLabel, nominalLabel, bottle, saldo, parameterLabel3, userIDLabel
     root = Tk()
     root.title("atm sampah - aria")
     #Full screen geometry
@@ -395,7 +394,7 @@ def connexion():
     except:
         pass
     t1 = threading.Thread(target=readSerial)
-    t1.deamon = True
+    t1.daemon = True
     t1.start()
 
 #STOP RUNNING LOOP KETIKA WINDOWS DI CLOSE=====================
