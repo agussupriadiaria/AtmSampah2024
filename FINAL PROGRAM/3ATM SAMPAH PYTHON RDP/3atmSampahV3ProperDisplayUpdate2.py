@@ -1,6 +1,6 @@
 '''
 SERIAL KOMUNIKASI UART 3a
-Detail: 1 channel
+Detail:
 ** Tools: Raspy, RTC, arduino uno, barcode scanner, thermal printer
 ** Notes:
 ** Serial0 Permission:
@@ -31,17 +31,10 @@ TX = gpio 15
 /////////////////////////////////////
 
 toDo:
-- Pisahkan command untuk gerakan stepper motor dan cetak struk >> DONE
-- Pisahkan hasil pembacaan scanner, Data Ok lanjut proses, data tak Ok stop proses
-- Perlu tambahan gpio 6
+- Untuk pembuatan struk dengan barcode, buat dengan bantuan AI
 
-toDo List 2:
-- Scanner to raspy udah ok, tinggal arduino to thernal printer, apakah bisa ok?
-
-ISSUE:
-- String issue, tampilan angka barcode tidak sesuai | barcode udah sesuai, yang discan harus 13 digit barcode, bukan 12 --- done
-- Data belum tersimpan device | Data sudah tersimpan --- done
-- Servo dan stepper motor belum jalan, padahal sudah ada input masuk dari IR --- done
+Issue:
+-
 
 '''
 
