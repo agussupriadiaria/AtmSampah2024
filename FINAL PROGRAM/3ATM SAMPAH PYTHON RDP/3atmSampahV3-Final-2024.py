@@ -39,16 +39,21 @@ import serial.tools.list_ports
 import threading
 import time
 import sys
-import serial
 import signal
-import RPi.GPIO as gp #MODULE GPIO [KHUSUS RASPBERRY]
+import RPi.GPIO as gp
 import random
+from  escpos.printer import Serial
+import gspread
+from oauth2client.service_account import ServiceAccountCredentials
 
 #THERMAL PRINTER=======
 from  escpos.printer import Serial
+
+#GPIO PINS SETTING=======
+gp.setwarnings(False)
 gp.setmode(gp.BCM)
 gp.setup(5, gp.OUT)
-gp.output(5, gp.HIGH) #Mematikan GPIO pin saat pertama mesin jalan====================
+gp.output(5, gp.HIGH)
 gp.setup(6, gp.IN, pull_up_down=gp.PUD_UP)
 gp.setup(13, gp.OUT)
 gp.output(13, gp.HIGH)
@@ -56,6 +61,13 @@ gp.setup(19, gp.OUT)
 gp.output(19, gp.HIGH)
 gp.setup(26, gp.IN, pull_up_down=gp.PUD_UP)
 
+#GSHEET SETTING=======
+def setGsheet():
+    global sheet
+    scope = ["https://spreadsheets.google.com/feeds", "https://www.googleapis.com/auth/drive"]
+    creds = ServiceAccountCredentials.from_json_keyfile_name("/home/blacksheep/Desktop/AUTOSTART/credential.json", scope)
+    client = gspread.authorize(creds)
+    sheet = client.open("ATMSAMPAH2024").sheet1
 
 #TAMBAHAN PENYETABIL BACAAN SENSOR============
 def signal_handler(signum, frame):
@@ -99,6 +111,8 @@ def mainPage():
 #LABEL ARIA==============r
     ariaLabel = Label(mainFrame, text="[ARIA - JOG]", font=("Courier",10, "bold"), bg="white")
     ariaLabel.place(x=615, y=10)
+    #ariaLabel = Label(mainFrame, text="[TrshTrsr - Malang]", font=("Courier",10, "bold"), bg="white")
+    #ariaLabel.place(x=560, y=10)
 
 #PARAMETER FRAME===============
     parameterFrame = Frame(mainFrame, bg="white",width=350, height=200, highlightbackground="blue", highlightthickness=5 )
@@ -221,7 +235,7 @@ def thermalPrinterX():
     p.text("Terima kasih\n")
     p.text("\n\n\n")
 #Command untuk potong struk==============
-    p.text(0)
+    #p.text(0)
 
 #DEF SAVE DATA TO STORAGE=================
 def saveData():
@@ -266,6 +280,7 @@ def barcodeGate(): #INI DITARUH DIMANA COBA???
         saldo += 15
         bottleCounter()
         saveData()
+        sendToSheet()
     elif(lineRead=="9300830022557"):
         pinOutArduino()
         ukuranLabel["text"] = "Medium"
@@ -273,6 +288,7 @@ def barcodeGate(): #INI DITARUH DIMANA COBA???
         saldo += 10
         bottleCounter()
         saveData()
+        sendToSheet()
     else:
         ukuranLabel["text"] = "Not Registered"
         nominalLabel["text"] = "Not Registered"
@@ -290,6 +306,7 @@ Kertas: 8991389232057 '''
 # 2	Good Mood	8992775709061	15	Big
 # 3	Hand Sanitizer	8992745610816	10	Big / not registered
 
+#SETTING DATA JAM=================
 def updateTime():
     global time_text
     hours = time.strftime("%H") # Pakai %I  untuk am/pm
@@ -300,6 +317,7 @@ def updateTime():
     timeStamp.config(text= time_text)
     timeStamp.after(1000, updateTime)
 
+#SETTING DATA TANGGAL==============
 def updateDate():
     global date_text
     tanggal = time.strftime ("%d")
@@ -350,12 +368,25 @@ def inSensor():
         pass
     root.after(5,inSensor)#Ini coba dihilangin bisa tetap jalan atau nggak?=======================
 
+#INPUT PIN, FULL SENSOR==========
 def fullSensor():
     if (gp.input(6) == gp.LOW):
         gp.output(5, gp.HIGH)
     else:
         gp.output(5, gp.LOW)
     root.after(5,fullSensor)
+
+#SETTING INPUT DATA KE GOOGLE SPREADSHEET============
+def sendToSheet():
+    try:
+        while True:
+            sheet.append_row([lineRead, time_text, date_text, bottle, saldo, userID])
+            time.sleep(1)  # Delay kecil agar tidak menulis terlalu cepat
+            break
+    except KeyboardInterrupt:
+        print("Program dihentikan.")
+    except Exception as e:
+        print(f"Terjadi kesalahan: {e}")
 
 #MASUKKAN PILIHAN PORT DAN BAUD RATE================
 def connexion():
@@ -388,7 +419,7 @@ def closeWindow():
 
 #RUN PROGRAM LOOP====================================
 mainPage()
-#root.after(10,cetakStruk)
+root.after(10,setGsheet)
 root.after(5,inSensor)
 root.after(5,fullSensor)
 root.protocol("WM_DELETE_WINDOW",closeWindow) #Stop running loop ketika nggak sengaja ter close

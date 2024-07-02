@@ -1,19 +1,24 @@
 '''
 ============== ATM SAMPAH 2024 ==============
-Testing 7 Mei 2024 > Ok
-'''
+Testing 2 Juli 2024
 
+Target:
+- Send data to spreadsheet
+
+'''
 from tkinter import *
 import serial.tools.list_ports
 import threading
 import time
 import sys
-#import serial
 import signal
 import RPi.GPIO as gp
 import random
-
 from  escpos.printer import Serial
+import gspread
+from oauth2client.service_account import ServiceAccountCredentials
+
+gp.setwarnings(False)
 gp.setmode(gp.BCM)
 gp.setup(5, gp.OUT)
 gp.output(5, gp.HIGH)
@@ -24,6 +29,13 @@ gp.setup(19, gp.OUT)
 gp.output(19, gp.HIGH)
 gp.setup(26, gp.IN, pull_up_down=gp.PUD_UP)
 
+def setGsheet():
+    global sheet
+    scope = ["https://spreadsheets.google.com/feeds", "https://www.googleapis.com/auth/drive"]
+    creds = ServiceAccountCredentials.from_json_keyfile_name("/home/blacksheep/Desktop/AUTOSTART/credential.json", scope)
+    client = gspread.authorize(creds)
+    sheet = client.open("ATMSAMPAH2024").sheet1
+
 def signal_handler(signum, frame):
     sys.exit()
 signal.signal(signal.SIGINT, signal_handler)
@@ -32,13 +44,11 @@ def mainPage():
     global root, timeStamp, dateStamp, barcodeLabel, jumlahLabel, ukuranLabel, nominalLabel, bottle, saldo, parameterLabel3, userIDLabel
     root = Tk()
     root.attributes('-fullscreen',True)
-    root.title("atm sampah - aria")
-    #root.attributes("-fullscreen", True)
+    root.title("Atm Sampah - TrashTreasure")
     #root.geometry("800x500")
     root.config(bg="white")
-    #root.attributes('-fullscreen',True)
 
-    titleLabel = Label(root, text="ATM SAMPAH", font=("Helvatica",18, "bold"), bg="white")
+    titleLabel = Label(root, text="TRASH TREASURE", font=("Helvatica",18, "bold"), bg="white")
     titleLabel.place(relx=0.5, rely=0.1,anchor=CENTER)
 
     mainFrame = Frame(root, bg="white", bd=10, highlightbackground="green", highlightthickness=5)
@@ -57,8 +67,8 @@ def mainPage():
     dateStamp = Label(stampFrame, text="dd/mm/yy",font=("Helvatica",10, "bold"), bg="white")
     dateStamp.place(x=100, y=30)
 
-    ariaLabel = Label(mainFrame, text="[ARIA - JOG]", font=("Courier",10, "bold"), bg="white")
-    ariaLabel.place(x=615, y=10)
+    ariaLabel = Label(mainFrame, text="[TrshTrsr - Malang]", font=("Courier",10, "bold"), bg="white")
+    ariaLabel.place(x=560, y=10)
 
     parameterFrame = Frame(mainFrame, bg="white",width=350, height=200, highlightbackground="blue", highlightthickness=5 )
     parameterFrame.place(x=10, y=75)
@@ -147,8 +157,8 @@ def thermalPrinterX():
     """ 9600 Baud, 8N1, Flow Control Enabled """
     p = Serial(devfile='/dev/serial0', baudrate=9600, bytesize=8, parity='N', stopbits=1, timeout=1.00, dsrdtr=True)
     p.set(font="a", height=1, align="center", bold=True, double_height=False)
-    p.text("ARIA\n")
-    p.text("ATM SAMPAH JOGJA\n\n")
+    p.text("ATM SAMPAH\n")
+    p.text("TRASH TREASURE\n\n")
     #CONTENT===
     p.set(font="a", height=1, align="center", bold=True, double_height=False)
     p.text("Jumlah Botol: ")
@@ -166,11 +176,8 @@ def thermalPrinterX():
     #FOOTAGE===
     p.text("Terima kasih\n")
     p.text("\n\n\n")
-    p.text(0)
 
 def saveData():
-    #fb = open('/home/aria/EVERMOS AGUS/PROJECT/gitHub/pythonProject/pythonProject/saveData/data.txt', 'a')
-    #fb = open('/home/aria/saveData/saveData.txt', 'a')
     fb = open('/home/blacksheep/saveData/saveData.txt', 'a')
     fb.write("Barcode: ")
     fb.write(lineRead)
@@ -209,6 +216,7 @@ def barcodeGate():
         saldo += 15
         bottleCounter()
         saveData()
+        sendToSheet()
     elif(lineRead=="8886008101053"):
         pinOutArduino()
         ukuranLabel["text"] = "Medium"
@@ -216,6 +224,7 @@ def barcodeGate():
         saldo += 10
         bottleCounter()
         saveData()
+        sendToSheet()
     elif(lineRead=="8997035601383"):
         pinOutArduino()
         ukuranLabel["text"] = "Medium"
@@ -223,6 +232,7 @@ def barcodeGate():
         saldo += 10
         bottleCounter()
         saveData()
+        sendToSheet()
     elif(lineRead=="8994096222281"):
         pinOutArduino()
         ukuranLabel["text"] = "Medium"
@@ -230,6 +240,7 @@ def barcodeGate():
         saldo += 10
         bottleCounter()
         saveData()
+        sendToSheet()
     else:
         ukuranLabel["text"] = "Not Registered"
         nominalLabel["text"] = "Not Registered"
@@ -301,6 +312,17 @@ def fullSensor():
     else:
         gp.output(5, gp.LOW)
     root.after(5,fullSensor)
+    
+def sendToSheet():
+    try:
+        while True:
+            sheet.append_row([lineRead, time_text, date_text, bottle, saldo, userID])
+            time.sleep(1)  # Delay kecil agar tidak menulis terlalu cepat
+            break
+    except KeyboardInterrupt:
+        print("Program dihentikan.")
+    except Exception as e:
+        print(f"Terjadi kesalahan: {e}")
 
 def connexion():
     global ser, serialData
@@ -330,6 +352,7 @@ def closeWindow():
     root.destroy()
 
 mainPage()
+root.after (7,setGsheet)
 root.after(7,inSensor)
 root.after(7,fullSensor)
 root.protocol("WM_DELETE_WINDOW",closeWindow)
