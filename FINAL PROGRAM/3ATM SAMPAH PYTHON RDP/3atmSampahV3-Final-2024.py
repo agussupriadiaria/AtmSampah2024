@@ -65,7 +65,7 @@ gp.setup(26, gp.IN, pull_up_down=gp.PUD_UP)
 def setGsheet():
     global sheet
     scope = ["https://spreadsheets.google.com/feeds", "https://www.googleapis.com/auth/drive"]
-    creds = ServiceAccountCredentials.from_json_keyfile_name("/home/blacksheep/Desktop/AUTOSTART/credential.json", scope)
+    creds = ServiceAccountCredentials.from_json_keyfile_name("/home/blacksheep/Desktop/AUTOSTART/credentialhere.(json)", scope)
     client = gspread.authorize(creds)
     sheet = client.open("ATMSAMPAH2024").sheet1
 
