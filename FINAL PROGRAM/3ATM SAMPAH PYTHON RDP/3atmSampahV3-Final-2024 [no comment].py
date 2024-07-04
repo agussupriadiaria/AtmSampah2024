@@ -316,7 +316,7 @@ def fullSensor():
 def sendToSheet():
     try:
         while True:
-            sheet.append_row([lineRead, time_text, date_text, bottle, saldo, userID])
+            sheet.append_row([lineRead, time_text, date_text, bottle, saldo, userID, nominalLabel])
             time.sleep(1)  # Delay kecil agar tidak menulis terlalu cepat
             break
     except KeyboardInterrupt:
