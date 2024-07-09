@@ -272,7 +272,9 @@ def saveData():
 
 #ARGS COMMAND HERE=====================
 def barcodeGate(): #INI DITARUH DIMANA COBA???
-    global saldo
+    global saldo, a, b, c
+    a=15
+    b=10
     if(lineRead=="8991389232057"):
         pinOutArduino()
         ukuranLabel["text"] = "Big"
