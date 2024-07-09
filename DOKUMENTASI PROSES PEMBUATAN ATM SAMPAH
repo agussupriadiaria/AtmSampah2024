@@ -139,3 +139,17 @@ Untuk proses backup menggunakan fitur:
 Accessories > SD Card Copier
 Terus copy data dari SD card to USB
 Source: https://www.youtube.com/watch?v=OcL7Ul-ajz0&ab_channel=KM4ACK 
+-------------------------------
+KONEKSI RASPI X BARCODE SCANNERL X GOOGLESHEET:
+1. Buat kredensial
+- Aktifkan Drive api dan spreadsheet api?
+- Buat kredensial
+2. Koneksikan ke gsheet
+- Buat gsheet
+- Share akses editor dengan key kredensial
+3. Running program python
+- Install library gspread dan oauth2client
+- input data link gsheet dan directory json file [json file dan file python dijadikan satu folder saja]
+Source:
+https://www.youtube.com/watch?v=Z3XfbAtcGQY
+https://www.youtube.com/watch?v=IZrzdspl_3k&t=701s 
