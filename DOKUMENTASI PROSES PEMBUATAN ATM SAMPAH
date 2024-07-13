@@ -153,3 +153,13 @@ KONEKSI RASPI X BARCODE SCANNERL X GOOGLESHEET:
 Source:
 https://www.youtube.com/watch?v=Z3XfbAtcGQY
 https://www.youtube.com/watch?v=IZrzdspl_3k&t=701s 
+
+///////////////////////////////////////
+INSTALL UFW DAN FAIL2BAN
+Fitur untuk menjaga keamanan perangkat jika ingin di koneksikan dengan internet dan di kontrol dari jarak jauh
+> ufw = gunakan port 3210
+> fail2ban = setting di section [sshd]:
+[sshd]
+backend = systemd
+journalmatch = _SYSTEMD_UNIT=ssh.service + _COMM=sshd
+enabled = true
