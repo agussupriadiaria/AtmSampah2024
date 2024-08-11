@@ -1,0 +1,3 @@
+ATM SAMPAH 2024
+* Double barcode scanner (Vertical + Horizontal)
+* Conveyor slider
