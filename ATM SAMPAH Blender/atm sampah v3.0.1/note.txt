@@ -1,0 +1,3 @@
+ATM SAMPAH 2024
+* Single barcode scanner
+* Swepper
